@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10"
+        >
+
+
+        <ImageView
+            android:id="@+id/imgHinhChiTiet"
+            android:src="@drawable/no_images"
+            android:layout_weight="3"
+            android:scaleType="fitXY"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+        <TextView
+            android:background="@drawable/custom_name_chitiet"
+            android:gravity="center_vertical"
+            android:textSize="20sp"
+            android:textColor="#000"
+            android:id="@+id/txtNameChiTiet"
+            android:text="Name"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="#b7b7b7" />
+        <LinearLayout
+            android:weightSum="10"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <ImageView
+                android:scaleType="center"
+                android:src="@drawable/icon_location"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/txtAddressChiTiet"
+                android:gravity="center_vertical"
+                android:layout_weight="9"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <View
+            android:background="#b7b7b7"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"/>
+        <TextView
+            android:background="@drawable/custom_name_chitiet"
+            android:id="@+id/txtIntroduceChiTiet"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+        <View
+            android:background="#0008fd"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+        <ListView
+            android:id="@+id/lvComment"
+            android:layout_weight="3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"></ListView>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="10"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <EditText
+                android:hint="Nhận xét, bình luận..."
+                android:id="@+id/edtCmt"
+                android:layout_weight="8"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+            <Button
+                android:id="@+id/btnCmt"
+                android:text="Gửi"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
+

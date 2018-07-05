@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "251583169501",
+    "firebase_url": "https://doanthuctap-8f692.firebaseio.com",
+    "project_id": "doanthuctap-8f692",
+    "storage_bucket": "doanthuctap-8f692.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:251583169501:android:323ba34ba2b48d15",
+        "android_client_info": {
+          "package_name": "com.example.asus.deanthuctap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "251583169501-ddlbtrm4dnkk4n0e70p26i3nnv27tuoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqSs44HedHjLE2zSeDUr_WZCDr5drKmbU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

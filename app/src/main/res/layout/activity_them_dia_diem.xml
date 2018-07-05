@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:padding="10dp"
+tools:context=".ThemDiaDiemActivity">
+
+<LinearLayout
+    android:weightSum="10"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:gravity="center"
+        android:layout_weight="3"
+        android:text="Chọn tỉnh:"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+    <Spinner
+        android:layout_weight="7"
+        android:id="@+id/spTinhThanhThem"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"></Spinner>
+</LinearLayout>
+<LinearLayout
+    android:weightSum="10"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:gravity="center"
+        android:layout_weight="3"
+        android:text="Tên địa điểm:"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+
+    <EditText
+        android:id="@+id/edtTenDiaDiemThem"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="6"
+        android:inputType="textCapWords" />
+    <TextView
+        android:textColor="#F00"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:text="(*)"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+</LinearLayout>
+
+<LinearLayout
+    android:weightSum="10"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:gravity="center"
+        android:layout_weight="3"
+        android:text="Địa chỉ:"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+
+    <EditText
+        android:id="@+id/edtDiaChiThem"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:enabled="false"
+        android:textSize="14sp" />
+    <TextView
+        android:textColor="#F00"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:text="(*)"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+    <ImageButton
+        android:id="@+id/imgbtnMap"
+        android:src="@drawable/icon_map"
+        android:background="@null"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+</LinearLayout>
+
+<LinearLayout
+    android:weightSum="10"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_weight="2"
+        android:gravity="center"
+        android:text="Ảnh:"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+    <ImageView
+        android:src="@drawable/no_images"
+        android:layout_weight="6"
+        android:id="@+id/imgHinhThem"
+        android:layout_width="0dp"
+        android:layout_height="200dp" />
+    <Button
+        android:layout_weight="2"
+        android:layout_gravity="center"
+        android:id="@+id/btnLayAnhTuDT"
+        android:text="..."
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
+
+<LinearLayout
+    android:weightSum="10"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:gravity="center"
+        android:layout_weight="3"
+        android:text="Giới thiệu:"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+
+    <EditText
+        android:id="@+id/edtGioiThieuThem"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="7"
+        android:inputType="textCapSentences" />
+</LinearLayout>
+<LinearLayout
+    android:weightSum="10"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:gravity="center"
+        android:layout_weight="3"
+        android:text="Tọa độ bản dồ:"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+    <EditText
+        android:textSize="14sp"
+        android:enabled="false"
+        android:layout_weight="6"
+        android:id="@+id/edtKinhDo"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+    <TextView
+        android:textColor="#F00"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:text="(*)"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+
+
+</LinearLayout>
+<LinearLayout
+    android:weightSum="10"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_weight="3"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+    <EditText
+        android:textSize="14sp"
+        android:enabled="false"
+        android:layout_weight="6"
+        android:id="@+id/edtViDo"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+    <TextView
+        android:textColor="#F00"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:text="(*)"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+</LinearLayout>
+<Button
+    android:layout_gravity="right"
+    android:gravity="center"
+    android:text="Thêm"
+    android:id="@+id/btnThem"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+</LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
