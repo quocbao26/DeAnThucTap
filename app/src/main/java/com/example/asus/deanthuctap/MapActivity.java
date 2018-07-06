@@ -2,6 +2,7 @@ package com.example.asus.deanthuctap;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -83,6 +84,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private String viDo = "";
     private String diaChi = "";
 
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,8 +93,20 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         btnXacNhanToaDo = findViewById(R.id.btnXacNhanToaDo);
         mSearchText = findViewById(R.id.input_search);
         mGps = findViewById(R.id.img_gps);
+
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Đang tải..");
+
         Log.e(TAG,"OnCreate ---------------------");
         getLocationPermission();
+
+
+        Intent intent = getIntent();
+        kinhDo = intent.getStringExtra("latitude");
+        viDo = intent.getStringExtra("longitude");
+
+
 
         btnXacNhanToaDo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +125,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        progressDialog.show();
         Log.e(TAG,"OnMapReady ---------------------");
         Toast.makeText(this, "Map on ready", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "onMapReady: map on ready");
@@ -129,6 +145,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
             init();
         }
+        progressDialog.dismiss();
     }
 
     private void init(){

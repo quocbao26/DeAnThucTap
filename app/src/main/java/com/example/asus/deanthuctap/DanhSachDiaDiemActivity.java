@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -59,12 +60,21 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
 
 
     ImageView imgHinhSua;
+    Spinner spTinhThanhSua;
+    EditText edtTenSua,edtDiaChiSua,edtGioiThieuSua;
+    Button btnSua,btnHuySua,btnLayAnhTuDTSua;
+    ImageButton imgbtnMapUpdate;
+
+    ArrayList<String> arrTinhThanhSua;
+    ArrayAdapter adapterSua;
 
     String selectedChoose = "";
     String keySelected="";
     String keyXoa="",keySua="";
     int vitri = -1;
     String madiadiemXoa="",hinhanhXoa="",tendiadiemXoa="",diachiXoa="",gioithieuXoa="",latitudeXoa ="",longitudeXoa ="";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,16 +196,17 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
 
         dialogSua.setCanceledOnTouchOutside(false);
 
-        final Spinner spTinhThanhSua      = dialogSua.findViewById(R.id.spTinhThanhSua);
-        EditText edtTenSua          = dialogSua.findViewById(R.id.edtTenDiaDiemSua);
-        EditText edtDiaChiSua       = dialogSua.findViewById(R.id.edtDiaChiSua);
-        EditText edtGioiThieuSua    = dialogSua.findViewById(R.id.edtGioiThieuSua);
-        imgHinhSua                  = dialogSua.findViewById(R.id.imgHinhSua);
-        Button btnLayAnhTuDTSua     = dialogSua.findViewById(R.id.btnLayAnhTuDTSua);
-        Button btnSua               = dialogSua.findViewById(R.id.btnSua);
-        Button btnHuySua            = dialogSua.findViewById(R.id.btnHuySua);
-        final ArrayList<String> arrTinhThanhSua;
-        final ArrayAdapter adapterSua;
+        spTinhThanhSua     = dialogSua.findViewById(R.id.spTinhThanhSua);
+        edtTenSua          = dialogSua.findViewById(R.id.edtTenDiaDiemSua);
+        edtDiaChiSua       = dialogSua.findViewById(R.id.edtDiaChiSua);
+        edtGioiThieuSua    = dialogSua.findViewById(R.id.edtGioiThieuSua);
+        imgHinhSua         = dialogSua.findViewById(R.id.imgHinhSua);
+        imgbtnMapUpdate    = dialogSua.findViewById(R.id.imgbtnMapUpdate);
+
+        btnLayAnhTuDTSua   = dialogSua.findViewById(R.id.btnLayAnhTuDTSua);
+        btnSua             = dialogSua.findViewById(R.id.btnSua);
+        btnHuySua          = dialogSua.findViewById(R.id.btnHuySua);
+
 
         arrTinhThanhSua = new ArrayList<>();
         adapterSua = new ArrayAdapter<>(DanhSachDiaDiemActivity.this,android.R.layout.simple_spinner_item,arrTinhThanhSua);
@@ -243,8 +254,12 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
             }
         });
 
+        imgbtnMapUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-
+            }
+        });
 
 
         btnHuySua.setOnClickListener(new View.OnClickListener() {
@@ -256,6 +271,8 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
 
         dialogSua.show();
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

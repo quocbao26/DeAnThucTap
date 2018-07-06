@@ -37,7 +37,18 @@ public class TimKiemActivity extends AppCompatActivity {
         Setcontrols();
         load_All_Diadiem();
 
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
     }
 
 
@@ -92,7 +103,7 @@ public class TimKiemActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-
+                adapter.getFilter().filter(newText);
                 return false;
             }
         });

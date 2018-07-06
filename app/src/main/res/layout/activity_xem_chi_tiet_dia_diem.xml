@@ -82,13 +82,15 @@
             <EditText
                 android:hint="Nhận xét, bình luận..."
                 android:id="@+id/edtCmt"
-                android:layout_weight="8"
+                android:layout_weight="9"
                 android:layout_width="0dp"
                 android:layout_height="match_parent" />
-            <Button
+            <ImageButton
+                android:background="@null"
+                android:src="@drawable/icon_send"
                 android:id="@+id/btnCmt"
                 android:text="Gửi"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent" />
         </LinearLayout>

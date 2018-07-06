@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TabHost;
@@ -42,7 +43,7 @@ public class XemChiTietDiaDiemActivity extends FragmentActivity {
 
     TextView txtNameChiTiet,txtAddressChiTiet,txtIntroduceChiTiet;
     ImageView imgHinh;
-    Button btnGui;
+    ImageButton btnGui;
     EditText edtCmt;
 
     DatabaseReference nodeRoot;
@@ -65,7 +66,7 @@ public class XemChiTietDiaDiemActivity extends FragmentActivity {
     private void addEvents() {
 
         Intent intent = getIntent();
-        DiaDiemModel diaDiemModel = (DiaDiemModel) intent.getSerializableExtra("chitiet_diadiem");
+        final DiaDiemModel diaDiemModel = (DiaDiemModel) intent.getSerializableExtra("chitiet_diadiem");
         txtNameChiTiet.setText(diaDiemModel.getTendiadiem());
         txtAddressChiTiet.setText(diaDiemModel.getDiachi());
         txtIntroduceChiTiet.setText(diaDiemModel.getGioithieu());
@@ -96,6 +97,17 @@ public class XemChiTietDiaDiemActivity extends FragmentActivity {
                         }
                     });
                 }
+            }
+        });
+
+        txtAddressChiTiet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(XemChiTietDiaDiemActivity.this,MapActivity.class);
+                intent.putExtra("latitude",diaDiemModel.getLatitude());
+                intent.putExtra("longitude",diaDiemModel.getLongitude());
+                Log.d(TAG,diaDiemModel.getLatitude() + " - " + diaDiemModel.getLongitude());
+                startActivity(intent);
             }
         });
 
@@ -136,11 +148,7 @@ public class XemChiTietDiaDiemActivity extends FragmentActivity {
                     }
 
                 }
-
-
-                }
-
-
+            }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {

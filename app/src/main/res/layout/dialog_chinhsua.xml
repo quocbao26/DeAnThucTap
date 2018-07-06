@@ -66,8 +66,17 @@
             android:layout_width="0dp"
             android:layout_height="match_parent" />
         <EditText
-            android:layout_weight="7"
+            android:textSize="14sp"
+            android:layout_weight="6"
             android:id="@+id/edtDiaChiSua"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:enabled="false"/>
+        <ImageButton
+            android:id="@+id/imgbtnMapUpdate"
+            android:src="@drawable/icon_map"
+            android:background="@null"
+            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
     </LinearLayout>

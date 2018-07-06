@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ThemTinhThanh">
+    tools:context=".ThemTinhThanh"
+    android:background="@drawable/bg_tinhthanh">
 
     <LinearLayout
         android:weightSum="10"
@@ -13,10 +14,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:textColor="#000000"
+            android:hint="Nhập tỉnh thành mới..."
             android:layout_weight="8"
             android:id="@+id/edtTinhThanhAdd"
             android:layout_width="0dp"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:inputType="textCapWords"/>
         <Button
             android:id="@+id/btnThemTinhThanh"
             android:text="Thêm"

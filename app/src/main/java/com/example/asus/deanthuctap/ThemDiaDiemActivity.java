@@ -78,7 +78,7 @@ public class ThemDiaDiemActivity extends AppCompatActivity {
 
         nodeRoot = FirebaseDatabase.getInstance().getReference();
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        storageRef = storage.getReferenceFromUrl("gs://doanthuctap-8f692.appspot.com");
+        storageRef = storage.getReferenceFromUrl("gs://doanthuctap-44bd2.appspot.com");
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Thông báo");
@@ -100,13 +100,16 @@ public class ThemDiaDiemActivity extends AppCompatActivity {
         nodeRoot.child("tinhthanhs").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot valueTinh : dataSnapshot.getChildren())
+                if(dataSnapshot != null)
                 {
-                    String tinh = valueTinh.getValue(String.class);
-                    arrTinhThanh.add(tinh);
+                    for (DataSnapshot valueTinh : dataSnapshot.getChildren())
+                    {
+                        String tinh = valueTinh.getValue(String.class);
+                        arrTinhThanh.add(tinh);
+                    }
+                    Log.e(TAG,arrTinhThanh+"");
+                    adapter.notifyDataSetChanged();
                 }
-                Log.e(TAG,arrTinhThanh+"");
-                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -154,8 +157,6 @@ public class ThemDiaDiemActivity extends AppCompatActivity {
         }else{
             imgbtnMap.setEnabled(false);
         }
-
-
 
     }
 
