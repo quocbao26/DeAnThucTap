@@ -70,7 +70,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     AutoCompleteTextView mSearchText;
     ImageView mGps;
 
-
     Boolean mLocationPermissionGranted = false;
     FusedLocationProviderClient mFusedLocationProviderClient;
     Location currentLocation;
@@ -79,7 +78,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     PlaceAutocompleteAdapter mPlaceAutocompleteAdapter;
     GoogleApiClient mGoogleApiClient;
     PlaceInfo  mPlace;
-
 
     String kinhDo = "";
     String viDo = "";

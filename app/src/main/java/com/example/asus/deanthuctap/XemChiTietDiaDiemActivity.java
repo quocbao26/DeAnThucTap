@@ -47,12 +47,14 @@ public class XemChiTietDiaDiemActivity extends FragmentActivity {
     EditText edtCmt;
 
     DatabaseReference nodeRoot;
+    DiaDiemModel diaDiemModel;
 
     ListView lvComment;
     ArrayList<String> arrayComment;
     ArrayAdapter adapter;
 
     String madd="";
+    Double latitude, longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,11 +68,15 @@ public class XemChiTietDiaDiemActivity extends FragmentActivity {
     private void addEvents() {
 
         Intent intent = getIntent();
-        final DiaDiemModel diaDiemModel = (DiaDiemModel) intent.getSerializableExtra("chitiet_diadiem");
+        diaDiemModel = (DiaDiemModel) intent.getSerializableExtra("chitiet_diadiem");
         txtNameChiTiet.setText(diaDiemModel.getTendiadiem());
         txtAddressChiTiet.setText(diaDiemModel.getDiachi());
         txtIntroduceChiTiet.setText(diaDiemModel.getGioithieu());
-        Picasso.get().load(diaDiemModel.getHinhanhdiadiem()).resize(600,500).into(imgHinh);
+        latitude = Double.valueOf(diaDiemModel.getLatitude());
+        longitude = Double.valueOf(diaDiemModel.getLongitude());
+
+
+        Picasso.get().load(diaDiemModel.getHinhanhdiadiem()).into(imgHinh);
 
         madd = diaDiemModel.getMadiadiem();
 
@@ -104,10 +110,10 @@ public class XemChiTietDiaDiemActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(XemChiTietDiaDiemActivity.this,MapChiTietActivity.class);
-                intent.putExtra("latitude",diaDiemModel.getLatitude());
-                intent.putExtra("longitude",diaDiemModel.getLongitude());
-                intent.putExtra("title",diaDiemModel.getTendiadiem());
-                Log.d(TAG,diaDiemModel.getLatitude() + " - " + diaDiemModel.getLongitude());
+                intent.putExtra("latitude",latitude);
+                intent.putExtra("longitude",longitude);
+                intent.putExtra("title", diaDiemModel.getTendiadiem());
+                Log.e(TAG,latitude + " - " + longitude);
                 startActivity(intent);
             }
         });

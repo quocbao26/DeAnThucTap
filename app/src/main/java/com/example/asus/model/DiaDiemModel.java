@@ -35,15 +35,6 @@ public class DiaDiemModel implements Serializable {
         this.hinhanhdiadiem = hinhanhdiadiem;
     }
 
-    public String getHinhanhdiadiem() {
-        return hinhanhdiadiem;
-    }
-
-    public void setHinhanhdiadiem(String hinhanhdiadiem) {
-        this.hinhanhdiadiem = hinhanhdiadiem;
-    }
-
-
     public String getMadiadiem() {
         return madiadiem;
     }
@@ -92,68 +83,11 @@ public class DiaDiemModel implements Serializable {
         this.longitude = longitude;
     }
 
-//    public void getDanhSachDiaDiem(final IDiaDiem iDiaDiem){
-//        final List<DiaDiemModel> diaDiemModelList = new ArrayList<>();
-//        ValueEventListener valueEventListener = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                DataSnapshot dataSnapshotDiaDiem = dataSnapshot.child("diadiems");
-//
-//                for (DataSnapshot valueMaTinhThanh : dataSnapshotDiaDiem.getChildren()){
-//                    for(DataSnapshot valueMaQuanAn : valueMaTinhThanh.getChildren())
-//                    {
-//                        DiaDiemModel diaDiemModel = valueMaQuanAn.getValue(DiaDiemModel.class);
-//                        diaDiemModelList.add(diaDiemModel);
-//                        iDiaDiem.getDanhSachDiaDiemMoDel(diaDiemModelList);
-//
-//                        DataSnapshot dataSnapshotHinhDiaDiem = dataSnapshot.child("hinhanhs").child(valueMaQuanAn.getKey());
-//                        List<String> hinhanhlist = new ArrayList<>();
-//                        for(DataSnapshot valueHinh : dataSnapshotDiaDiem.getChildren()){
-//
-//                        }
-//
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        };
-//        nodeRoot.addListenerForSingleValueEvent(valueEventListener);
-//    }
-//    public void getDanhSachTinhThanh(final IDiaDiem iDiaDiem){
-//        final List<String> arrTinhThanh = new ArrayList<>();
-//        ValueEventListener valueEventListener = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                nodeRoot.child("tinhthanhs").addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(DataSnapshot dataSnapshot) {
-//                        for (DataSnapshot valueTinh : dataSnapshot.getChildren())
-//                        {
-//                            String tinh = valueTinh.getValue(String.class);
-//                            arrTinhThanh.add(tinh);
-//                            iDiaDiem.getDanhSachTinhThanh(arrTinhThanh);
-//                        }
-//
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(DatabaseError databaseError) {
-//
-//                    }
-//                });
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        };
-//        nodeRoot.addValueEventListener(valueEventListener);
-//    }
+    public String getHinhanhdiadiem() {
+        return hinhanhdiadiem;
+    }
 
+    public void setHinhanhdiadiem(String hinhanhdiadiem) {
+        this.hinhanhdiadiem = hinhanhdiadiem;
+    }
 }

@@ -39,7 +39,7 @@ public class MapChiTietActivity extends AppCompatActivity implements OnMapReadyC
 
     public static final String TAG = "MapChiTietActivity";
 
-     ImageView mGps,mDirection;
+    ImageView mGps,mDirection;
 
     private static final String FINE_LOCATION = android.Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COARSE_LOCATION = android.Manifest.permission.ACCESS_COARSE_LOCATION;
@@ -53,8 +53,6 @@ public class MapChiTietActivity extends AppCompatActivity implements OnMapReadyC
     FusedLocationProviderClient mFusedLocationProviderClient;
     Location currentLocation;
 
-    Double latitude;
-    Double longitude;
     Double latitudeDetail;
     Double longitudeDetail;
     String title="";
@@ -70,9 +68,11 @@ public class MapChiTietActivity extends AppCompatActivity implements OnMapReadyC
 
 
         Intent intent = getIntent();
-        latitudeDetail = Double.valueOf(intent.getStringExtra("latitude"));
-        longitudeDetail = Double.valueOf(intent.getStringExtra("longitude"));
+        latitudeDetail = intent.getDoubleExtra("latitude",0);
+        longitudeDetail = intent.getDoubleExtra("longitude",0);
         title = intent.getStringExtra("title");
+        Log.e(TAG,latitudeDetail + " - " + longitudeDetail + " - " +title);
+
 
 
     }
@@ -88,6 +88,12 @@ public class MapChiTietActivity extends AppCompatActivity implements OnMapReadyC
         if (mLocationPermissionGranted) {
 
             getLocationSelected();
+//            LatLng latLng = new LatLng(latitudeDetail,longitudeDetail);
+//            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,DEFAULT_ZOOM));
+//            MarkerOptions options = new MarkerOptions()
+//                    .position(latLng)
+//                    .title(title);
+//            mMap.addMarker(options);
 
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
@@ -128,7 +134,7 @@ public class MapChiTietActivity extends AppCompatActivity implements OnMapReadyC
         mDirection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                moveCamera(new LatLng(latitudeDetail,longitudeDetail),10,title);
+                moveCamera(new LatLng(latitudeDetail,longitudeDetail),DEFAULT_ZOOM,title);
             }
         });
 

@@ -143,7 +143,7 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
                 gioithieuXoa    = diaDiemModelArrayList.get(i).getGioithieu();
                 latitudeXoa     = diaDiemModelArrayList.get(i).getLatitude();
                 longitudeXoa    = diaDiemModelArrayList.get(i).getLongitude();
-                final DiaDiemModel diaDiemModel = new DiaDiemModel(madiadiemXoa,tendiadiemXoa,diachiXoa,gioithieuXoa,longitudeXoa, latitudeXoa, hinhanhXoa);
+                final DiaDiemModel diaDiemModel = new DiaDiemModel(madiadiemXoa,tendiadiemXoa,diachiXoa,gioithieuXoa,latitudeXoa, longitudeXoa, hinhanhXoa);
 
                 CharSequence []item = {"Chỉnh sửa","Xóa"};
                 AlertDialog.Builder builderOption = new AlertDialog.Builder(DanhSachDiaDiemActivity.this);
@@ -377,8 +377,8 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
                                             diaDiemModel.getTendiadiem(),
                                             diaDiemModel.getDiachi(),
                                             diaDiemModel.getGioithieu(),
-                                            diaDiemModel.getLongitude(),
                                             diaDiemModel.getLatitude(),
+                                            diaDiemModel.getLongitude(),
                                             diaDiemModel.getHinhanhdiadiem()));
                                     adapter.notifyDataSetChanged();
                                 }

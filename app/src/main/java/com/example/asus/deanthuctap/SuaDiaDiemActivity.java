@@ -91,6 +91,7 @@ public class SuaDiaDiemActivity extends AppCompatActivity {
         keyDiaDiem = diaDiemModel.getMadiadiem();
         hinhanhSua = diaDiemModel.getHinhanhdiadiem();
         Log.e(TAG,"đã nhận vị trí: "+vitri+"");
+        Log.e(TAG,diaDiemModel.getLatitude() + ", " +diaDiemModel.getLongitude());
 
         addEvents();
     }
