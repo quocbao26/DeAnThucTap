@@ -81,7 +81,21 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage("Bạn có chắc chắn thoát ?");
+        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
     }
 
     private void Setcontrols() {

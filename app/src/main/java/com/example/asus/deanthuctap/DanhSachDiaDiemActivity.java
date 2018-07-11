@@ -70,7 +70,7 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
 
     String selectedChoose = "";
     String keySelected="";
-    String keyXoa="",keySua="";
+    String keyXoa="";
     int vitri = -1;
     String madiadiemXoa="",hinhanhXoa="",tendiadiemXoa="",diachiXoa="",gioithieuXoa="",latitudeXoa ="",longitudeXoa ="";
 
@@ -133,7 +133,7 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
         // Click giữ item
         griviewItem.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public boolean onItemLongClick(AdapterView<?> adapterView, final View view, int i, long l) {
                 final int position = i;
 
                 madiadiemXoa    = diaDiemModelArrayList.get(i).getMadiadiem();
@@ -143,7 +143,7 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
                 gioithieuXoa    = diaDiemModelArrayList.get(i).getGioithieu();
                 latitudeXoa     = diaDiemModelArrayList.get(i).getLatitude();
                 longitudeXoa    = diaDiemModelArrayList.get(i).getLongitude();
-                final DiaDiemModel diaDiemModel = new DiaDiemModel(madiadiemXoa,tendiadiemXoa,diachiXoa,gioithieuXoa,latitudeXoa,longitudeXoa,hinhanhXoa);
+                final DiaDiemModel diaDiemModel = new DiaDiemModel(madiadiemXoa,tendiadiemXoa,diachiXoa,gioithieuXoa,longitudeXoa, latitudeXoa, hinhanhXoa);
 
                 CharSequence []item = {"Chỉnh sửa","Xóa"};
                 AlertDialog.Builder builderOption = new AlertDialog.Builder(DanhSachDiaDiemActivity.this);
@@ -152,7 +152,13 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if(i == 0)
                         {
-                            SuaDiaDiem(diaDiemModel);
+                            Intent intent = new Intent(DanhSachDiaDiemActivity.this,SuaDiaDiemActivity.class);
+                            intent.putExtra("object",diaDiemModel);
+                            intent.putExtra("vitriSpinner",vitri);
+                            intent.putExtra("keySpinner",keySelected);
+                            Log.e(TAG,"đã truyền vị trí: "+vitri);
+                            Log.e(TAG,"key Spinner: "+keySelected);
+                            startActivity(intent);
                         }else
                         if(i == 1)
                         {
@@ -182,114 +188,114 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
 
 
 
-    private void SuaDiaDiem(DiaDiemModel diaDiemModel) {
-        final Dialog dialogSua = new Dialog(this);
-        dialogSua.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialogSua.setContentView(R.layout.dialog_chinhsua);
+//    private void SuaDiaDiem(DiaDiemModel diaDiemModel, int position) {
+//        final Dialog dialogSua = new Dialog(this);
+//        dialogSua.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        dialogSua.setContentView(R.layout.dialog_chinhsua);
+//
+//        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+//        lp.copyFrom(dialogSua.getWindow().getAttributes());
+//        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+//        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+//        lp.gravity = Gravity.CENTER;
+//        dialogSua.getWindow().setAttributes(lp);
+//
+//        dialogSua.setCanceledOnTouchOutside(false);
+//
+//        spTinhThanhSua     = dialogSua.findViewById(R.id.spTinhThanhSua);
+//        edtTenSua          = dialogSua.findViewById(R.id.edtTenDiaDiemSua);
+//        edtDiaChiSua       = dialogSua.findViewById(R.id.edtDiaChiSua);
+//        edtGioiThieuSua    = dialogSua.findViewById(R.id.edtGioiThieuSua);
+//        imgHinhSua         = dialogSua.findViewById(R.id.imgHinhSua);
+//        imgbtnMapUpdate    = dialogSua.findViewById(R.id.imgbtnMapUpdate);
+//
+//        btnLayAnhTuDTSua   = dialogSua.findViewById(R.id.btnLayAnhTuDTSua);
+//        btnSua             = dialogSua.findViewById(R.id.btnSua);
+//        btnHuySua          = dialogSua.findViewById(R.id.btnHuySua);
+//
+//
+//        arrTinhThanhSua = new ArrayList<>();
+//        adapterSua = new ArrayAdapter<>(DanhSachDiaDiemActivity.this,android.R.layout.simple_spinner_item,arrTinhThanhSua);
+//        adapterSua.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spTinhThanhSua.setAdapter(adapterSua);
+//
+//        nodeRoot.child("tinhthanhs").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot valueTinh : dataSnapshot.getChildren())
+//                {
+//                    String tinh = valueTinh.getValue(String.class);
+//                    arrTinhThanhSua.add(tinh);
+//                }
+//
+//                adapterSua.notifyDataSetChanged();
+//                spTinhThanhSua.setSelection(vitri);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//
+//        edtTenSua.setText(diaDiemModel.getTendiadiem());
+//        edtDiaChiSua.setText(diaDiemModel.getDiachi());
+//        edtGioiThieuSua.setText(diaDiemModel.getGioithieu());
+//        Picasso.get().load(diaDiemModel.getHinhanhdiadiem()).resize(300,300).into(imgHinhSua);
+//
+//        btnLayAnhTuDTSua.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent pickPhoto = new Intent(Intent.ACTION_PICK,
+//                                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                startActivityForResult(pickPhoto , 1);
+//
+//            }
+//        });
+//
+//        btnSua.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
+//
+//        imgbtnMapUpdate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+//
+//
+//        btnHuySua.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                dialogSua.dismiss();
+//            }
+//        });
+//
+//        dialogSua.show();
+//    }
 
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(dialogSua.getWindow().getAttributes());
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        lp.gravity = Gravity.CENTER;
-        dialogSua.getWindow().setAttributes(lp);
-
-        dialogSua.setCanceledOnTouchOutside(false);
-
-        spTinhThanhSua     = dialogSua.findViewById(R.id.spTinhThanhSua);
-        edtTenSua          = dialogSua.findViewById(R.id.edtTenDiaDiemSua);
-        edtDiaChiSua       = dialogSua.findViewById(R.id.edtDiaChiSua);
-        edtGioiThieuSua    = dialogSua.findViewById(R.id.edtGioiThieuSua);
-        imgHinhSua         = dialogSua.findViewById(R.id.imgHinhSua);
-        imgbtnMapUpdate    = dialogSua.findViewById(R.id.imgbtnMapUpdate);
-
-        btnLayAnhTuDTSua   = dialogSua.findViewById(R.id.btnLayAnhTuDTSua);
-        btnSua             = dialogSua.findViewById(R.id.btnSua);
-        btnHuySua          = dialogSua.findViewById(R.id.btnHuySua);
 
 
-        arrTinhThanhSua = new ArrayList<>();
-        adapterSua = new ArrayAdapter<>(DanhSachDiaDiemActivity.this,android.R.layout.simple_spinner_item,arrTinhThanhSua);
-        adapterSua.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spTinhThanhSua.setAdapter(adapterSua);
-
-        nodeRoot.child("tinhthanhs").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot valueTinh : dataSnapshot.getChildren())
-                {
-                    String tinh = valueTinh.getValue(String.class);
-                    arrTinhThanhSua.add(tinh);
-                }
-
-                adapterSua.notifyDataSetChanged();
-                spTinhThanhSua.setSelection(vitri);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        edtTenSua.setText(diaDiemModel.getTendiadiem());
-        edtDiaChiSua.setText(diaDiemModel.getDiachi());
-        edtGioiThieuSua.setText(diaDiemModel.getGioithieu());
-        Picasso.get().load(diaDiemModel.getHinhanhdiadiem()).resize(300,300).into(imgHinhSua);
-
-        btnLayAnhTuDTSua.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent pickPhoto = new Intent(Intent.ACTION_PICK,
-                                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(pickPhoto , 1);
-
-            }
-        });
-
-        btnSua.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        imgbtnMapUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-
-        btnHuySua.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialogSua.dismiss();
-            }
-        });
-
-        dialogSua.show();
-    }
-
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1 && resultCode == RESULT_OK && data != null)
-        {
-            Uri imageUri = data.getData();
-            try {
-                InputStream inputStream = getContentResolver().openInputStream(imageUri);
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                imgHinhSua.setImageBitmap(bitmap);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                Log.e("Loi Gallery: ",e.toString());
-            }
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if(requestCode == 1 && resultCode == RESULT_OK && data != null)
+//        {
+//            Uri imageUri = data.getData();
+//            try {
+//                InputStream inputStream = getContentResolver().openInputStream(imageUri);
+//                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+//                imgHinhSua.setImageBitmap(bitmap);
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//                Log.e("Loi Gallery: ",e.toString());
+//            }
+//        }
+//    }
 
 
     private void XoaDiaDiem(DiaDiemModel diaDiemModel, final int position) {
@@ -320,7 +326,6 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
                                     Toast.makeText(DanhSachDiaDiemActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                                    LoadData();
                                 }
                             }
 
@@ -357,7 +362,6 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
                 for (DataSnapshot valueTinhThanh : dataSnapshot.getChildren()) {
                     if (selectedChoose.equals(valueTinhThanh.getValue(String.class))) {
                         keySelected = valueTinhThanh.getKey();
-
                     }
                 }
 
@@ -378,6 +382,7 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
                                             diaDiemModel.getHinhanhdiadiem()));
                                     adapter.notifyDataSetChanged();
                                 }
+                                Log.d(TAG,"Mảng có " + diaDiemModelArrayList.size() + " địa điểm");
                             }
                             else {
                                 adapter.notifyDataSetChanged();
@@ -398,7 +403,7 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
 
             }
         });
-        adapter.notifyDataSetChanged();
+//        adapter.notifyDataSetChanged();
     }
 
     private void Setcontrol() {
@@ -415,6 +420,9 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
         griviewItem.setAdapter(adapter);
     }
 
-
-
+    @Override
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
+    }
 }

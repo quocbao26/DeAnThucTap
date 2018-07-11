@@ -103,9 +103,10 @@ public class XemChiTietDiaDiemActivity extends FragmentActivity {
         txtAddressChiTiet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(XemChiTietDiaDiemActivity.this,MapActivity.class);
+                Intent intent = new Intent(XemChiTietDiaDiemActivity.this,MapChiTietActivity.class);
                 intent.putExtra("latitude",diaDiemModel.getLatitude());
                 intent.putExtra("longitude",diaDiemModel.getLongitude());
+                intent.putExtra("title",diaDiemModel.getTendiadiem());
                 Log.d(TAG,diaDiemModel.getLatitude() + " - " + diaDiemModel.getLongitude());
                 startActivity(intent);
             }

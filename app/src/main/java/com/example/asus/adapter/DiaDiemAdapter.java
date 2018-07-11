@@ -71,7 +71,7 @@ public class DiaDiemAdapter extends BaseAdapter implements Filterable {
 
         DiaDiemModel diaDiemModel = diaDiemModelList.get(i);
         holder.txtItemName.setText(diaDiemModel.getTendiadiem());
-        Picasso.get().load(diaDiemModel.getHinhanhdiadiem()).resize(450,350).into(holder.imgItemHinh);
+        Picasso.get().load(diaDiemModel.getHinhanhdiadiem()).resize(350,250).into(holder.imgItemHinh);
 
 
         return view;

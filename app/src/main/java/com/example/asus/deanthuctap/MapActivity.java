@@ -41,6 +41,7 @@ import com.google.android.gms.location.places.AutocompletePrediction;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceBuffer;
 import com.google.android.gms.location.places.Places;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -57,11 +58,6 @@ import java.util.List;
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener {
 
     public static final String TAG = "MapActivity";
-
-    private Button btnXacNhanToaDo;
-    private AutoCompleteTextView mSearchText;
-    private ImageView mGps;
-
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
@@ -70,19 +66,28 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             new LatLng(-40,-168),new LatLng(71,136)
     );
 
-    private Boolean mLocationPermissionGranted = false;
-    private FusedLocationProviderClient mFusedLocationProviderClient;
-    private Location currentLocation;
-    private GoogleMap mMap;
-    private MapFragment mapFragment;
-    private PlaceAutocompleteAdapter mPlaceAutocompleteAdapter;
-    private GoogleApiClient mGoogleApiClient;
-    private PlaceInfo  mPlace;
+    Button btnXacNhanToaDo;
+    AutoCompleteTextView mSearchText;
+    ImageView mGps;
 
 
-    private String kinhDo = "";
-    private String viDo = "";
-    private String diaChi = "";
+    Boolean mLocationPermissionGranted = false;
+    FusedLocationProviderClient mFusedLocationProviderClient;
+    Location currentLocation;
+    GoogleMap mMap;
+    MapFragment mapFragment;
+    PlaceAutocompleteAdapter mPlaceAutocompleteAdapter;
+    GoogleApiClient mGoogleApiClient;
+    PlaceInfo  mPlace;
+
+
+    String kinhDo = "";
+    String viDo = "";
+    String diaChi = "";
+    String ten = "";
+    String gioithieu = "";
+    int vitriSpinner;
+
 
     private ProgressDialog progressDialog;
 
@@ -95,17 +100,17 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mGps = findViewById(R.id.img_gps);
 
 
+        Intent intent = getIntent();
+        ten = intent.getStringExtra("ten");
+        gioithieu = intent.getStringExtra("gioithieu");
+        vitriSpinner = intent.getIntExtra("vitriSpinner",0);
+        Log.e(TAG,"Nhận vị trí: "+vitriSpinner+"");
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Đang tải..");
 
         Log.e(TAG,"OnCreate ---------------------");
         getLocationPermission();
-
-
-        Intent intent = getIntent();
-        kinhDo = intent.getStringExtra("latitude");
-        viDo = intent.getStringExtra("longitude");
-
 
 
         btnXacNhanToaDo.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +121,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 intent.putExtra("kinhdo",kinhDo);
                 intent.putExtra("vido",viDo);
                 intent.putExtra("diachi",diaChi);
+                intent.putExtra("ten",ten);
+                intent.putExtra("gioithieu",gioithieu);
+                intent.putExtra("vitriSpinner",vitriSpinner);
                 startActivity(intent);
                 finish();
             }
@@ -208,12 +216,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             Address address = list.get(0);
 
             Log.d(TAG,"geoLocate: found a location "+address.toString());
-            //Toast.makeText(this, address.toString(), Toast.LENGTH_SHORT).show();
 
             moveCamera(new LatLng(address.getLatitude(),address.getLongitude()),DEFAULT_ZOOM,
                     address.getAddressLine(0));
         }
     }
+
+
 
     private void getDeviceLocation() {
         Log.d(TAG, "getDeviceLocation: getting the devices current location");
@@ -376,10 +385,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             moveCamera(new LatLng(place.getViewport().getCenter().latitude,
                     place.getViewport().getCenter().longitude),DEFAULT_ZOOM,mPlace.getName());
 
-            kinhDo = String.valueOf(place.getViewport().getCenter().latitude);
-            viDo = String.valueOf(place.getViewport().getCenter().longitude);
+            kinhDo = String.valueOf(place.getViewport().getCenter().longitude);
+            viDo = String.valueOf(place.getViewport().getCenter().latitude);
             diaChi = String.valueOf(place.getAddress());
             places.release();
         }
     };
+
+
 }

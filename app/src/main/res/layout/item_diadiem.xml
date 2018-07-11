@@ -14,7 +14,7 @@
     <TextView
         android:gravity="center_horizontal"
         android:textColor="#F00"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:id="@+id/txtItemName"
         android:text="Ten"
         android:layout_width="wrap_content"
