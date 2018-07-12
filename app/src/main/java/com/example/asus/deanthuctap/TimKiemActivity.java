@@ -56,9 +56,10 @@ public class TimKiemActivity extends AppCompatActivity {
         nodeRoot.child("diadiems").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
+                Log.e(TAG,"Moi vao"+dataSnapshot.toString());
                 for (DataSnapshot keyDiaDiem : dataSnapshot.getChildren())
                 {
+                    Log.e(TAG,"KeyDiaDiem"+keyDiaDiem.toString());
                     DiaDiemModel diaDiemModel = keyDiaDiem.getValue(DiaDiemModel.class);
                     arrayDiaDiem.add(diaDiemModel);
                     Log.d(TAG,diaDiemModel.getTendiadiem());
@@ -88,28 +89,28 @@ public class TimKiemActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.menu_search,menu);
-
-        MenuItem menuItem = menu.findItem(R.id.menu_search);
-        SearchView searchView = (SearchView) menuItem.getActionView();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
-                return false;
-            }
-        });
-
-        return super.onCreateOptionsMenu(menu);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//
+//        getMenuInflater().inflate(R.menu.menu_search,menu);
+//
+//        MenuItem menuItem = menu.findItem(R.id.menu_search);
+//        SearchView searchView = (SearchView) menuItem.getActionView();
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                adapter.getFilter().filter(newText);
+//                return false;
+//            }
+//        });
+//
+//        return super.onCreateOptionsMenu(menu);
+//    }
 
     private void Setcontrols() {
         sv = findViewById(R.id.svDiaDiem);

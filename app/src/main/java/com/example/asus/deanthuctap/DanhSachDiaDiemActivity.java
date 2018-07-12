@@ -187,117 +187,6 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
 }
 
 
-
-//    private void SuaDiaDiem(DiaDiemModel diaDiemModel, int position) {
-//        final Dialog dialogSua = new Dialog(this);
-//        dialogSua.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        dialogSua.setContentView(R.layout.dialog_chinhsua);
-//
-//        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-//        lp.copyFrom(dialogSua.getWindow().getAttributes());
-//        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-//        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-//        lp.gravity = Gravity.CENTER;
-//        dialogSua.getWindow().setAttributes(lp);
-//
-//        dialogSua.setCanceledOnTouchOutside(false);
-//
-//        spTinhThanhSua     = dialogSua.findViewById(R.id.spTinhThanhSua);
-//        edtTenSua          = dialogSua.findViewById(R.id.edtTenDiaDiemSua);
-//        edtDiaChiSua       = dialogSua.findViewById(R.id.edtDiaChiSua);
-//        edtGioiThieuSua    = dialogSua.findViewById(R.id.edtGioiThieuSua);
-//        imgHinhSua         = dialogSua.findViewById(R.id.imgHinhSua);
-//        imgbtnMapUpdate    = dialogSua.findViewById(R.id.imgbtnMapUpdate);
-//
-//        btnLayAnhTuDTSua   = dialogSua.findViewById(R.id.btnLayAnhTuDTSua);
-//        btnSua             = dialogSua.findViewById(R.id.btnSua);
-//        btnHuySua          = dialogSua.findViewById(R.id.btnHuySua);
-//
-//
-//        arrTinhThanhSua = new ArrayList<>();
-//        adapterSua = new ArrayAdapter<>(DanhSachDiaDiemActivity.this,android.R.layout.simple_spinner_item,arrTinhThanhSua);
-//        adapterSua.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spTinhThanhSua.setAdapter(adapterSua);
-//
-//        nodeRoot.child("tinhthanhs").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for (DataSnapshot valueTinh : dataSnapshot.getChildren())
-//                {
-//                    String tinh = valueTinh.getValue(String.class);
-//                    arrTinhThanhSua.add(tinh);
-//                }
-//
-//                adapterSua.notifyDataSetChanged();
-//                spTinhThanhSua.setSelection(vitri);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//
-//        edtTenSua.setText(diaDiemModel.getTendiadiem());
-//        edtDiaChiSua.setText(diaDiemModel.getDiachi());
-//        edtGioiThieuSua.setText(diaDiemModel.getGioithieu());
-//        Picasso.get().load(diaDiemModel.getHinhanhdiadiem()).resize(300,300).into(imgHinhSua);
-//
-//        btnLayAnhTuDTSua.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent pickPhoto = new Intent(Intent.ACTION_PICK,
-//                                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                startActivityForResult(pickPhoto , 1);
-//
-//            }
-//        });
-//
-//        btnSua.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
-//
-//        imgbtnMapUpdate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-//
-//
-//        btnHuySua.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dialogSua.dismiss();
-//            }
-//        });
-//
-//        dialogSua.show();
-//    }
-
-
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if(requestCode == 1 && resultCode == RESULT_OK && data != null)
-//        {
-//            Uri imageUri = data.getData();
-//            try {
-//                InputStream inputStream = getContentResolver().openInputStream(imageUri);
-//                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-//                imgHinhSua.setImageBitmap(bitmap);
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//                Log.e("Loi Gallery: ",e.toString());
-//            }
-//        }
-//    }
-
-
     private void XoaDiaDiem(DiaDiemModel diaDiemModel, final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(DanhSachDiaDiemActivity.this);
         builder.setTitle("Delete");
@@ -358,7 +247,7 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
         nodeRoot.child("tinhthanhs").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                Log.e(TAG,"Moi vao tinhthanhs: " + dataSnapshot.toString());
                 for (DataSnapshot valueTinhThanh : dataSnapshot.getChildren()) {
                     if (selectedChoose.equals(valueTinhThanh.getValue(String.class))) {
                         keySelected = valueTinhThanh.getKey();
@@ -369,6 +258,7 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
                 nodeRoot.child("diadiems").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        Log.e(TAG,"Moi vao diadiems: " + dataSnapshot.toString());
                         for(DataSnapshot dataKey: dataSnapshot.getChildren()){
                             if(dataKey.getKey().equals(keySelected)){
                                 for(DataSnapshot dataValue: dataKey.getChildren()){
@@ -382,7 +272,7 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
                                             diaDiemModel.getHinhanhdiadiem()));
                                     adapter.notifyDataSetChanged();
                                 }
-                                Log.d(TAG,"Mảng có " + diaDiemModelArrayList.size() + " địa điểm");
+                                Log.e(TAG,"Mảng có " + diaDiemModelArrayList.size() + " địa điểm");
                             }
                             else {
                                 adapter.notifyDataSetChanged();

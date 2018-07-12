@@ -1,6 +1,7 @@
 package com.example.asus.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,14 +22,16 @@ public class DiaDiemAdapter extends BaseAdapter implements Filterable {
 
     Context context;
     int layout;
-    List<DiaDiemModel> diaDiemModelList;
+    ArrayList<DiaDiemModel> diaDiemModelList,filterList;
     CustomFilter filter;
-    ArrayList<DiaDiemModel> filterList;
 
-    public DiaDiemAdapter(Context context, int layout, List<DiaDiemModel> diaDiemModelList) {
+
+    public DiaDiemAdapter(Context context, int layout, ArrayList<DiaDiemModel> diaDiemModelList) {
         this.context = context;
         this.layout = layout;
         this.diaDiemModelList = diaDiemModelList;
+        this.filterList = diaDiemModelList;
+
     }
 
     @Override
@@ -48,7 +51,7 @@ public class DiaDiemAdapter extends BaseAdapter implements Filterable {
 
 
 
-    class  ViewHolder{
+    class ViewHolder{
         ImageView imgItemHinh;
         TextView txtItemName;
     }
@@ -95,28 +98,35 @@ public class DiaDiemAdapter extends BaseAdapter implements Filterable {
 
             FilterResults results = new FilterResults();
 
-            if(constraint != null && constraint.length() > 0){
+            if(constraint != null && constraint.length() > 0)
+            {
                 constraint = constraint.toString().toUpperCase();
+
 
             ArrayList<DiaDiemModel>  filters = new ArrayList<>();
 
-            for(int i = 0; i < diaDiemModelList.size(); i++)
+            for(int i = 0; i < filterList.size(); i++)
             {
-                if(diaDiemModelList.get(i).getTendiadiem().toUpperCase().equals(constraint))
+                if(filterList.get(i).getTendiadiem().toUpperCase().contains(constraint))
                 {
-                    DiaDiemModel diaDiemModel = new DiaDiemModel(diaDiemModelList.get(i).getTendiadiem(),
-                            diaDiemModelList.get(i).getMadiadiem(),diaDiemModelList.get(i).getDiachi(),
-                            diaDiemModelList.get(i).getGioithieu(),diaDiemModelList.get(i).getLongitude(),
-                            diaDiemModelList.get(i).getLatitude(),diaDiemModelList.get(i).getHinhanhdiadiem());
+                    DiaDiemModel diaDiemModel = new DiaDiemModel(filterList.get(i).getMadiadiem(),
+                            filterList.get(i).getTendiadiem(),filterList.get(i).getDiachi(),
+                            filterList.get(i).getGioithieu(),filterList.get(i).getLatitude(),
+                            filterList.get(i).getLongitude(),filterList.get(i).getHinhanhdiadiem());
                     filters.add(diaDiemModel);
+
                 }
             }
+            // trả về số lượng địa điểm
                 results.count = filters.size();
+            // trả về giá trị địa điểm
                 results.values = filters;
+
             }
             else{
-                results.count = diaDiemModelList.size();
-                results.values = diaDiemModelList;
+                results.count = filterList.size();
+                results.values = filterList;
+
             }
 
 
@@ -126,7 +136,7 @@ public class DiaDiemAdapter extends BaseAdapter implements Filterable {
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            diaDiemModelList = (ArrayList<DiaDiemModel>) results.values;
+            diaDiemModelList  = (ArrayList<DiaDiemModel>) results.values;
             notifyDataSetChanged();
         }
     }
