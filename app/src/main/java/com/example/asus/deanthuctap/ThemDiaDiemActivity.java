@@ -3,15 +3,18 @@ package com.example.asus.deanthuctap;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -68,6 +71,7 @@ public class ThemDiaDiemActivity extends AppCompatActivity {
 
     DatabaseReference nodeRoot;
     StorageReference mountainsRef,storageRef;
+    LocationManager locationManager;
 
     String seletectedSpinner = "";
     String keyValueTinhThanh ="";
@@ -170,19 +174,48 @@ public class ThemDiaDiemActivity extends AppCompatActivity {
             imgbtnMap.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(ThemDiaDiemActivity.this,MapActivity.class);
-                    intent.putExtra("vitriSpinner",vitriDi);
-                    intent.putExtra("ten",edtTenDiaDiemThem.getText().toString().trim());
-                    intent.putExtra("gioithieu",edtGioiThieuThem.getText().toString().trim());
-                    Log.e(TAG,vitriDi+"");
-                    startActivity(intent);
-                    finish();
+
+                    locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                    if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
+                    {
+                        buildAlertMessageNoGps();
+                    }
+                    else{
+                        Intent intent = new Intent(ThemDiaDiemActivity.this,MapActivity.class);
+                        intent.putExtra("vitriSpinner",vitriDi);
+                        intent.putExtra("ten",edtTenDiaDiemThem.getText().toString().trim());
+                        intent.putExtra("gioithieu",edtGioiThieuThem.getText().toString().trim());
+                        Log.e(TAG,vitriDi+"");
+                        startActivity(intent);
+                        finish();
+                    }
+
+
                 }
             });
         }else{
             imgbtnMap.setEnabled(false);
         }
 
+    }
+    protected void buildAlertMessageNoGps() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Please Turn ON your GPS Connection")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, final int id) {
+
+                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
     }
 
 

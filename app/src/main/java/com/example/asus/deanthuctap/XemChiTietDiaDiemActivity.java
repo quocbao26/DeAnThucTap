@@ -1,6 +1,10 @@
 package com.example.asus.deanthuctap;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.LocationManager;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -9,6 +13,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -22,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asus.model.DiaDiemModel;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -48,6 +54,7 @@ public class XemChiTietDiaDiemActivity extends FragmentActivity {
 
     DatabaseReference nodeRoot;
     DiaDiemModel diaDiemModel;
+    LocationManager locationManager;
 
     ListView lvComment;
     ArrayList<String> arrayComment;
@@ -109,15 +116,41 @@ public class XemChiTietDiaDiemActivity extends FragmentActivity {
         txtAddressChiTiet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(XemChiTietDiaDiemActivity.this,MapChiTietActivity.class);
-                intent.putExtra("latitude",latitude);
-                intent.putExtra("longitude",longitude);
-                intent.putExtra("title", diaDiemModel.getTendiadiem());
-                Log.e(TAG,latitude + " - " + longitude);
-                startActivity(intent);
+                locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
+                {
+                    buildAlertMessageNoGps();
+                }else{
+                    Intent intent = new Intent(XemChiTietDiaDiemActivity.this,MapChiTietActivity.class);
+                    intent.putExtra("latitude",latitude);
+                    intent.putExtra("longitude",longitude);
+                    intent.putExtra("title", diaDiemModel.getTendiadiem());
+                    Log.e(TAG,latitude + " - " + longitude);
+                    startActivity(intent);
+                }
+                
             }
         });
 
+    }
+    protected void buildAlertMessageNoGps() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Please Turn ON your GPS Connection")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, final int id) {
+
+                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
     }
 
     private void loadComment(){

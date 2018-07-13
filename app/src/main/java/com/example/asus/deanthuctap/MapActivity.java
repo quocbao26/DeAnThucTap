@@ -263,7 +263,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     private void moveCamera(LatLng latLng,float zoom,String title){
-        Log.d(TAG,"moveCamera: move Camera to: lat: " + latLng.latitude + ", " + latLng.longitude);
+        Log.d(TAG,"moveCamera");
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,zoom));
 
         if (!title.equals("Bạn đang ở đây")){

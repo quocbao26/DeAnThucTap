@@ -1,7 +1,10 @@
 package com.example.asus.deanthuctap;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +12,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.asus.model.DiaDiemModel;
 import com.google.firebase.database.ChildEventListener;
@@ -27,9 +31,33 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(isConnected() == false) {
+            AlertDialog.Builder alertDialog=new AlertDialog.Builder(this);
+            alertDialog.setTitle("Thông báo")
+                    .setMessage("Bạn chưa kết nối mạng !!!")
+                    .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            finish();
+                        }
+                    })
+                    .show();
+        } else {
+            Toast.makeText(this, "Đã kết nối mạng", Toast.LENGTH_SHORT).show();
+        }
+
         Setcontrols();
         addEvents();
 
+
+    }
+
+    private boolean isConnected(){
+        ConnectivityManager cm=(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=cm.getActiveNetworkInfo();
+        if(networkInfo!=null && networkInfo.isConnectedOrConnecting())  return true;
+        return false;
     }
 
     private void addEvents() {
