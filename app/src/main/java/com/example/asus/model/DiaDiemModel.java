@@ -22,7 +22,7 @@ public class DiaDiemModel implements Serializable {
 
 
     public DiaDiemModel() {
-        nodeRoot = FirebaseDatabase.getInstance().getReference();
+
     }
 
     public DiaDiemModel(String madiadiem, String tendiadiem, String diachi, String gioithieu, String latitude, String longitude, String hinhanhdiadiem) {

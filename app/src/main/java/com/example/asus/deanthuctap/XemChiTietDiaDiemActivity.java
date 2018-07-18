@@ -174,9 +174,6 @@ public class XemChiTietDiaDiemActivity extends FragmentActivity {
                                         arrayComment.add(valueCmt);
                                     }
                                     adapter.notifyDataSetChanged();
-                                }else{
-                                    Toast.makeText(XemChiTietDiaDiemActivity.this, "Chưa có bình luận nào !", Toast.LENGTH_SHORT).show();
-
                                 }
                             }
 

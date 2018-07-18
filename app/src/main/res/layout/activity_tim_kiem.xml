@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10"
+    android:background="@drawable/bg_tinhthanh"
     tools:context="com.example.asus.deanthuctap.TimKiemActivity">
 
     <LinearLayout

@@ -129,6 +129,7 @@ public class MapChiTietActivity extends AppCompatActivity implements OnMapReadyC
             }
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(false);
+            mMap.getUiSettings().setZoomControlsEnabled(true);
             init();
 
 
@@ -220,18 +221,21 @@ public class MapChiTietActivity extends AppCompatActivity implements OnMapReadyC
 
             ParserTask parserTask = new ParserTask();
 
-
+            Log.e(TAG,"DownloadTask(onPostExecute): "+s);
             parserTask.execute(s);
         }
 
         @Override
         protected String doInBackground(String... strings) {
             String data = "";
+            InputStreamReader isr = null;
+            HttpURLConnection httpURLConnection = null;
             try {
 
                 URL url = new URL(strings[0]);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                InputStreamReader isr = new InputStreamReader(httpURLConnection.getInputStream());
+                httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.connect();
+                isr = new InputStreamReader(httpURLConnection.getInputStream());
                 BufferedReader br = new BufferedReader(isr);
 
                 StringBuffer builder = new StringBuffer();
@@ -245,6 +249,8 @@ public class MapChiTietActivity extends AppCompatActivity implements OnMapReadyC
 
             } catch (Exception e) {
                 Log.e("doInBackground: ", e.toString());
+            }finally {
+                httpURLConnection.disconnect();
             }
             return data;
         }
@@ -260,6 +266,7 @@ public class MapChiTietActivity extends AppCompatActivity implements OnMapReadyC
             List<List<HashMap<String, String>>> routes = null;
 
             try {
+                Log.e(TAG,"jsonData: "+jsonData[0]);
                 jObject = new JSONObject(jsonData[0]);
                 DirectionsJSONParser parser = new DirectionsJSONParser();
 
@@ -267,6 +274,7 @@ public class MapChiTietActivity extends AppCompatActivity implements OnMapReadyC
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            Log.e(TAG,"doInBackground: "+routes);
             return routes;
         }
 
@@ -274,13 +282,14 @@ public class MapChiTietActivity extends AppCompatActivity implements OnMapReadyC
         protected void onPostExecute(List<List<HashMap<String,String>>> result) {
             ArrayList points = null;
             PolylineOptions lineOptions = null;
-
+            Log.e(TAG,"onPostExecute: "+result);
+            Log.e(TAG,"onPostExecute(size_result): "+result.size());
             for (int i = 0; i < result.size(); i++) {
                 points = new ArrayList();
                 lineOptions = new PolylineOptions();
 
                 List<HashMap<String,String>> path = result.get(i);
-
+                Log.e(TAG,"onPostExecute(size_path): "+path.size());
                 for (int j = 0; j < path.size(); j++) {
                     HashMap point = path.get(j);
 
@@ -289,6 +298,7 @@ public class MapChiTietActivity extends AppCompatActivity implements OnMapReadyC
                     LatLng position = new LatLng(lat, lng);
 
                     points.add(position);
+//                    Log.e(TAG,"Array Points: "+points.toString());
                 }
 
                 lineOptions.addAll(points);
@@ -298,7 +308,7 @@ public class MapChiTietActivity extends AppCompatActivity implements OnMapReadyC
 
             }
 
-// Drawing polyline in the Google Map for the i-th route
+            // Drawing polyline in the Google Map for the i-th route
             mMap.addPolyline(lineOptions);
         }
     }

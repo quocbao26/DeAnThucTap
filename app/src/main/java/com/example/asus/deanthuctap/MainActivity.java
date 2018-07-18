@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asus.model.DiaDiemModel;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnDanhSachDiaDiem,btnThemDiaDiem,btnThemTinhThanh,btnTimKiem,btnThoat;
     DatabaseReference mTinhThanh;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -14,50 +14,47 @@
         android:text="@string/luuy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/btnDanhSachDiaDiem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="170dp"
-        android:background="@null"
-        android:fontFamily="@font/cherry_cream_soda"
-        android:text="@string/danh_sach_dia_diem" />
-
-    <Button
-        android:id="@+id/btnThemDiaDiem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="130dp"
-        android:background="@null"
-        android:fontFamily="@font/cherry_cream_soda"
-        android:text="@string/them_dia_diem" />
-    <Button
-        android:id="@+id/btnThemTinh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="160dp"
-        android:background="@null"
-        android:fontFamily="@font/cherry_cream_soda"
-        android:text="@string/them_tinh" />
-
-    <Button
-        android:id="@+id/btnTimKiem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="160dp"
-        android:background="@null"
-        android:fontFamily="@font/cherry_cream_soda"
-        android:text="@string/tim_kiem" />
-
-    <Button
-        android:id="@+id/btnThoat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="250dp"
-        android:background="@null"
-        android:fontFamily="@font/cherry_cream_soda"
-        android:text="@string/thoat" />
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/btnDanhSachDiaDiem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:background="@drawable/custom_button_press"
+            android:text="@string/danh_sach_dia_diem" />
+        <Button
+            android:layout_marginTop="5dp"
+            android:id="@+id/btnThemDiaDiem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_button_press"
+            android:text="@string/them_dia_diem" />
+        <Button
+            android:layout_marginTop="5dp"
+            android:id="@+id/btnThemTinh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_button_press"
+            android:text="@string/them_tinh" />
+        <Button
+            android:layout_marginTop="5dp"
+            android:id="@+id/btnTimKiem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_button_press"
+            android:text="@string/tim_kiem" />
+        <Button
+            android:layout_marginTop="5dp"
+            android:id="@+id/btnThoat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_button_press"
+            android:text="@string/thoat" />
+    </LinearLayout>
 
 
 

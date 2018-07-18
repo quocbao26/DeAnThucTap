@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp" />
         <TextView
-            android:background="@drawable/custom_name_chitiet"
+
             android:gravity="center_vertical"
             android:textSize="20sp"
             android:textColor="#000"
@@ -59,7 +59,6 @@
             android:layout_width="match_parent"
             android:layout_height="4dp"/>
         <TextView
-            android:background="@drawable/custom_name_chitiet"
             android:id="@+id/txtIntroduceChiTiet"
             android:layout_weight="1"
             android:layout_width="match_parent"

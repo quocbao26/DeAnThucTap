@@ -1,10 +1,13 @@
 package com.example.asus.deanthuctap;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.SearchView;
 
@@ -16,11 +19,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class TimKiemActivity extends AppCompatActivity {
 
     SearchView sv;
+    DiaDiemModel diaDiemModel;
 
     GridView gvSearchDiaDiem;
     ArrayList <DiaDiemModel> arrayDiaDiem;
@@ -49,6 +54,15 @@ public class TimKiemActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        gvSearchDiaDiem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(TimKiemActivity.this,XemChiTietDiaDiemActivity.class);
+                intent.putExtra("chitiet_diadiem",arrayDiaDiem.get(i));
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -60,7 +74,7 @@ public class TimKiemActivity extends AppCompatActivity {
                 for (DataSnapshot keyDiaDiem : dataSnapshot.getChildren())
                 {
                     Log.e(TAG,"KeyDiaDiem"+keyDiaDiem.toString());
-                    DiaDiemModel diaDiemModel = keyDiaDiem.getValue(DiaDiemModel.class);
+                    diaDiemModel = keyDiaDiem.getValue(DiaDiemModel.class);
                     arrayDiaDiem.add(diaDiemModel);
                     Log.d(TAG,diaDiemModel.getTendiadiem());
                 }

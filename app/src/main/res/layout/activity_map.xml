@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_tinhthanh"
     tools:context=".MapActivity">
 
     <fragment
@@ -19,7 +20,7 @@
         android:elevation="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@drawable/white_border"
+        android:background="@drawable/auto_comp_address"
         android:id="@+id/myRelativeSearch">
 
         <ImageView
@@ -39,7 +40,7 @@
             android:id="@+id/input_search"
             android:background="@null"
             android:hint="Nhập địa chỉ"
-            android:imeOptions="actionSearch"
+            android:imeOptions="flagNoExtractUi"
             android:focusable="true"
             android:focusableInTouchMode="true"/>
 
@@ -58,7 +59,8 @@
 
 
     <Button
-        android:layout_marginLeft="150dp"
+        android:background="@drawable/custom_button_press"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:id="@+id/btnXacNhanToaDo"
         android:text="Xác nhận"

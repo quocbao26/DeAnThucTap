@@ -96,8 +96,8 @@ public class ThemDiaDiemActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Thông báo");
         progressDialog.setMessage("Đang xử lý...");
+        progressDialog.setIndeterminate(true);
         progressDialog.setCanceledOnTouchOutside(false);
-
 
         Setcontrols();
         addEvents();
@@ -251,7 +251,6 @@ public class ThemDiaDiemActivity extends AppCompatActivity {
         }else{
 
             try {
-
                 progressDialog.show();
                 Calendar calendar = Calendar.getInstance();
                 mountainsRef = storageRef.child("image" + calendar.getTimeInMillis() + ".png");
@@ -313,7 +312,6 @@ public class ThemDiaDiemActivity extends AppCompatActivity {
                                             String id = nodeRoot.child("diadiems").push().getKey();
                                             DiaDiemModel diadiem = new DiaDiemModel(id, ten, diachi, gioithieu, latitude, longitude,String.valueOf(downloadUri));
 
-//                                            nodeRoot.child("hinhanhs").child(id).push().setValue(String.valueOf(downloadUri));
 
 
                                             nodeRoot.child("diadiems").child(keyValueTinhThanh).child(id).setValue(diadiem, new DatabaseReference.CompletionListener() {
@@ -327,7 +325,6 @@ public class ThemDiaDiemActivity extends AppCompatActivity {
                                                         edtViDo.setText("");
                                                         edtKinhDo.setText("");
                                                         imgHinh.setImageResource(R.drawable.no_images);
-                                                        finish();
                                                     } else {
                                                         Toast.makeText(ThemDiaDiemActivity.this, "Lưu thất bại", Toast.LENGTH_SHORT).show();
 
@@ -375,62 +372,7 @@ public class ThemDiaDiemActivity extends AppCompatActivity {
                 Log.e("Loi Gallery: ",e.toString());
             }
         }
-//        try {
-//            // When an Image is picked
-//            if (requestCode == 1 && resultCode == RESULT_OK
-//                    && null != data) {
-//                // Get the Image from data
-//
-//                String[] filePathColumn = { MediaStore.Images.Media.DATA };
-//                imagesEncodedList = new ArrayList<String>();
-//                if(data.getData()!=null){
-//
-//                    Uri mImageUri=data.getData();
-//
-//                    // Get the cursor
-//                    Cursor cursor = getContentResolver().query(mImageUri,
-//                            filePathColumn, null, null, null);
-//                    // Move to first row
-//                    cursor.moveToFirst();
-//
-//                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-//                    imageEncoded  = cursor.getString(columnIndex);
-//                    cursor.close();
-//
-//                } else {
-//                    if (data.getClipData() != null) {
-//                        ClipData mClipData = data.getClipData();
-//                        ArrayList<Uri> mArrayUri = new ArrayList<Uri>();
-//                        for (int i = 0; i < mClipData.getItemCount(); i++) {
-//
-//                            ClipData.Item item = mClipData.getItemAt(i);
-//                            Uri uri = item.getUri();
-//                            mArrayUri.add(uri);
-//                            // Get the cursor
-//                            Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
-//                            // Move to first row
-//                            cursor.moveToFirst();
-//
-//                            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-//                            imageEncoded  = cursor.getString(columnIndex);
-//                            imagesEncodedList.add(imageEncoded);
-//
-//                            cursor.close();
-//
-//                        }
-//                        Log.v("LOG_TAG", "Selected Images" + mArrayUri.size());
-//                    }
-//                }
-//            } else {
-//                Toast.makeText(this, "You haven't picked Image",
-//                        Toast.LENGTH_LONG).show();
-//            }
-//        } catch (Exception e) {
-//            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG)
-//                    .show();
-//        }
-//
-//        super.onActivityResult(requestCode, resultCode, data);
+
     }
 
     private void Setcontrols() {
@@ -453,21 +395,23 @@ public class ThemDiaDiemActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(ThemDiaDiemActivity.this);
-        builder.setMessage("Bạn có muốn ra Menu chính ?");
-        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(ThemDiaDiemActivity.this,MainActivity.class));
-                finish();
-            }
-        });
-        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
 
-            }
-        });
-        builder.show();
+            final AlertDialog.Builder builder = new AlertDialog.Builder(ThemDiaDiemActivity.this);
+            builder.setMessage("Bạn có muốn ra Menu chính ?");
+            builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    startActivity(new Intent(ThemDiaDiemActivity.this,MainActivity.class));
+                    finish();
+                }
+            });
+            builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            builder.show();
+
     }
 }

@@ -59,19 +59,11 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
     DatabaseReference nodeRoot;
 
 
-    ImageView imgHinhSua;
-    Spinner spTinhThanhSua;
-    EditText edtTenSua,edtDiaChiSua,edtGioiThieuSua;
-    Button btnSua,btnHuySua,btnLayAnhTuDTSua;
-    ImageButton imgbtnMapUpdate;
-
-    ArrayList<String> arrTinhThanhSua;
-    ArrayAdapter adapterSua;
-
     String selectedChoose = "";
     String keySelected="";
     String keyXoa="";
     int vitri = -1;
+    DiaDiemModel diaDiemModel;
     String madiadiemXoa="",hinhanhXoa="",tendiadiemXoa="",diachiXoa="",gioithieuXoa="",latitudeXoa ="",longitudeXoa ="";
 
 
@@ -87,7 +79,6 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
         Setcontrol();
 
         addEvents();
-
 
     }
 
@@ -119,7 +110,6 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
                 selectedChoose = (String) adapterView.getItemAtPosition(i);
                 vitri = adapterView.getSelectedItemPosition();
                 Log.e("Vtri sp ",vitri+"");
-                Log.e(TAG, keySelected);
                 LoadData();
             }
 
@@ -134,7 +124,6 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
         griviewItem.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, final View view, int i, long l) {
-                final int position = i;
 
                 madiadiemXoa    = diaDiemModelArrayList.get(i).getMadiadiem();
                 hinhanhXoa      = diaDiemModelArrayList.get(i).getHinhanhdiadiem();
@@ -143,7 +132,7 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
                 gioithieuXoa    = diaDiemModelArrayList.get(i).getGioithieu();
                 latitudeXoa     = diaDiemModelArrayList.get(i).getLatitude();
                 longitudeXoa    = diaDiemModelArrayList.get(i).getLongitude();
-                final DiaDiemModel diaDiemModel = new DiaDiemModel(madiadiemXoa,tendiadiemXoa,diachiXoa,gioithieuXoa,latitudeXoa, longitudeXoa, hinhanhXoa);
+                diaDiemModel = new DiaDiemModel(madiadiemXoa,tendiadiemXoa,diachiXoa,gioithieuXoa,latitudeXoa, longitudeXoa, hinhanhXoa);
 
                 CharSequence []item = {"Chỉnh sửa","Xóa"};
                 AlertDialog.Builder builderOption = new AlertDialog.Builder(DanhSachDiaDiemActivity.this);
@@ -162,7 +151,7 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
                         }else
                         if(i == 1)
                         {
-                           XoaDiaDiem(diaDiemModel,position);
+                           XoaDiaDiem(diaDiemModel);
                         }
                     }
 
@@ -187,7 +176,7 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
 }
 
 
-    private void XoaDiaDiem(DiaDiemModel diaDiemModel, final int position) {
+    private void XoaDiaDiem(DiaDiemModel diaDiemModel) {
         AlertDialog.Builder builder = new AlertDialog.Builder(DanhSachDiaDiemActivity.this);
         builder.setTitle("Delete");
         builder.setMessage("Bạn có muốn xóa " + diaDiemModel.getTendiadiem() + " không ?");
@@ -195,7 +184,6 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
-                diaDiemModelArrayList.remove(position);
                 nodeRoot.child("tinhthanhs").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -206,6 +194,23 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
                             }
                         }
                         nodeRoot.child("diadiems").child(keyXoa).child(madiadiemXoa).removeValue();
+                        nodeRoot.child("binhluans").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for (DataSnapshot keyDiaDiemBinhLuan: dataSnapshot.getChildren())
+                                {
+                                    if (madiadiemXoa.equals(keyDiaDiemBinhLuan.getKey()))
+                                    {
+                                        nodeRoot.child("binhluans").child(madiadiemXoa).removeValue();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
 
                         // chui vào Storage xóa
                         FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance();
@@ -254,10 +259,11 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
                     }
                 }
 
-                diaDiemModelArrayList.clear();
+
                 nodeRoot.child("diadiems").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        diaDiemModelArrayList.clear();
                         Log.e(TAG,"Moi vao diadiems: " + dataSnapshot.toString());
                         for(DataSnapshot dataKey: dataSnapshot.getChildren()){
                             if(dataKey.getKey().equals(keySelected)){

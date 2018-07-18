@@ -13,7 +13,20 @@
     <string name="map_api_key">AIzaSyCMaWtlKC4oWYsEwgMdQvcOUCjLf72SxgI</string>
 
     <!--Danh sách địa điểm-->
-    <string name="chon_tinh">Chọn tỉnh</string>
+    <string name="chon_tinh"><u>Chọn tỉnh:</u></string>
+
+    <!--Thêm địa điểm-->
+    <string name="them">Thêm địa điểm</string>
+    <string name="ten_dia_diem">Tên địa điểm:</string>
+    <string name="dia_chi">Địa chỉ:</string>
+    <string name="anh">Ảnh:</string>
+    <string name="gioi_thieu">Giới thiệu:</string>
+    <string name="toa_do_ban_do">Tọa độ bản đồ</string>
+    <string name="them_moi">Thêm</string>
+
+    <!--Sửa địa điểm-->
+    <string name="sua_dia_diem">Sửa địa điểm</string>
+    <string name="luu_y_sua">(Chỉ được sửa tên, giới thiệu, hình)</string>
 
     <string-array name="arrayTinhThanh">
         <item>An Giang</item>

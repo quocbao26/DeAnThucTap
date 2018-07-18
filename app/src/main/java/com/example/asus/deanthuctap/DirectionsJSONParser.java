@@ -18,12 +18,10 @@ import java.util.List;
 
 public class DirectionsJSONParser {
 
-    /**
-     * Receives a JSONObject and returns a list of lists containing latitude and longitude
-     */
-    public List<List<HashMap<String, String>>> parse(JSONObject jObject) {
+    /** Receives a JSONObject and returns a list of lists containing latitude and longitude */
+    public List<List<HashMap<String,String>>> parse(JSONObject jObject){
 
-        List<List<HashMap<String, String>>> routes = new ArrayList<>();
+        List<List<HashMap<String, String>>> routes = new ArrayList<List<HashMap<String,String>>>() ;
         JSONArray jRoutes = null;
         JSONArray jLegs = null;
         JSONArray jSteps = null;
@@ -33,25 +31,26 @@ public class DirectionsJSONParser {
             jRoutes = jObject.getJSONArray("routes");
 
             /** Traversing all routes */
-            for (int i = 0; i < jRoutes.length(); i++) {
-                jLegs = ((JSONObject) jRoutes.get(i)).getJSONArray("legs");
+            for(int i=0;i<jRoutes.length();i++){
+                jLegs = ( (JSONObject)jRoutes.get(i)).getJSONArray("legs");
                 List path = new ArrayList<HashMap<String, String>>();
 
                 /** Traversing all legs */
-                for (int j = 0; j < jLegs.length(); j++) {
-                    jSteps = ((JSONObject) jLegs.get(j)).getJSONArray("steps");
+                for(int j=0;j<jLegs.length();j++){
+                    jSteps = ( (JSONObject)jLegs.get(j)).getJSONArray("steps");
 
                     /** Traversing all steps */
-                    for (int k = 0; k < jSteps.length(); k++) {
+                    for(int k=0;k<jSteps.length();k++){
                         String polyline = "";
-                        polyline = (String) ((JSONObject) ((JSONObject) jSteps.get(k)).get("polyline")).get("points");
+                        polyline = (String)((JSONObject)((JSONObject)jSteps.get(k)).get("polyline")).get("points");
+                        Log.e("MapChiTietActivity: ","polyline: "+polyline);
                         List list = decodePoly(polyline);
 
                         /** Traversing all points */
-                        for (int l = 0; l < list.size(); l++) {
+                        for(int l=0;l <list.size();l++){
                             HashMap<String, String> hm = new HashMap<String, String>();
-                            hm.put("lat", Double.toString(((LatLng) list.get(l)).latitude));
-                            hm.put("lng", Double.toString(((LatLng) list.get(l)).longitude));
+                            hm.put("lat", Double.toString(((LatLng)list.get(l)).latitude) );
+                            hm.put("lng", Double.toString(((LatLng)list.get(l)).longitude) );
                             path.add(hm);
                         }
                     }
@@ -61,7 +60,7 @@ public class DirectionsJSONParser {
 
         } catch (JSONException e) {
             e.printStackTrace();
-        } catch (Exception e) {
+        }catch (Exception e){
         }
 
         return routes;
@@ -70,7 +69,7 @@ public class DirectionsJSONParser {
     /**
      * Method to decode polyline points
      * Courtesy : http://jeffreysambells.com/2010/05/27/decoding-polylines-from-google-maps-direction-api-with-java
-     */
+     * */
     private List decodePoly(String encoded) {
 
         List poly = new ArrayList();
@@ -80,25 +79,17 @@ public class DirectionsJSONParser {
         while (index < len) {
             int b, shift = 0, result = 0;
             do {
-                Log.e("DirectionsJSON","index1: "+index+" ---encoded.charAt(index++): "+encoded.charAt(index));
                 b = encoded.charAt(index++) - 63;
-                Log.e("DirectionsJSON","index: "+index+" ------b: "+b);
-                result |= (b & 0x1f) << shift; // (0x1f)0001 1111
-                Log.e("DirectionsJSON","result: "+result +" ---- b&0x1f: "+(b&0x1f) );
+                result |= (b & 0x1f) << shift;
                 shift += 5;
-                Log.e("DirectionsJSON","shift: "+shift);
-                Log.e("DirectionsJSON","--------------------------");
-            } while (b >= 0x20);  // 0001 0100
+            } while (b >= 0x20);
             int dlat = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
             lat += dlat;
 
             shift = 0;
             result = 0;
             do {
-                Log.e("DirectionsJSON","index2.1: "+index+" ---encoded.charAt(index++): "+encoded.charAt(index));
                 b = encoded.charAt(index++) - 63;
-                Log.e("DirectionsJSON","index2.2: "+index+" ---encoded.charAt(index++): "+encoded.charAt(index));
-                Log.e("DirectionsJSON","============================");
                 result |= (b & 0x1f) << shift;
                 shift += 5;
             } while (b >= 0x20);
