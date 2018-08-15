@@ -45,6 +45,7 @@ public class DirectionsJSONParser {
                         polyline = (String)((JSONObject)((JSONObject)jSteps.get(k)).get("polyline")).get("points");
                         Log.e("MapChiTietActivity: ","polyline: "+polyline);
                         List list = decodePoly(polyline);
+                        Log.e("MapChiTietActivity: ","decondePoly: "+decodePoly(polyline));
 
                         /** Traversing all points */
                         for(int l=0;l <list.size();l++){

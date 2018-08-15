@@ -39,7 +39,7 @@ public class ThemTinhThanh extends AppCompatActivity {
     ArrayAdapter adapter;
 
     String themmoi = " ",ten = "";
-    int position;
+//    int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +62,7 @@ public class ThemTinhThanh extends AppCompatActivity {
                     Toast.makeText(ThemTinhThanh.this, "Chưa có nội dung", Toast.LENGTH_SHORT).show();
                 }else{
                     nodeRoot.child("tinhthanhs").push().setValue(themmoi);
+                    Toast.makeText(ThemTinhThanh.this, "Đã thêm "+themmoi, Toast.LENGTH_SHORT).show();
                     edtTinhThanh.setText("");
                 }
 
@@ -71,43 +72,51 @@ public class ThemTinhThanh extends AppCompatActivity {
         lvTinhThanh.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(final AdapterView<?> adapterView, View view, int i, long l) {
-                ten = (String) adapterView.getItemAtPosition(i);
-                position  = i;
-                AlertDialog.Builder builder = new AlertDialog.Builder(ThemTinhThanh.this);
-                builder.setMessage("Bạn có chắc chắn muốn xóa " + ten + " không ?");
-                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, final int i) {
-                        Log.e(TAG,"Mảng trước khi xóa "+arrTinhThanh.toString());
+                if (MainActivity.user.equals("admin") && MainActivity.pass.equals("admin"))
+                {
+                    ten = (String) adapterView.getItemAtPosition(i);
+//                    position  = i;
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ThemTinhThanh.this);
+                    builder.setMessage("Bạn có chắc chắn muốn xóa " + ten + " không ?");
+                    builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, final int i) {
+                            Log.e(TAG,"Mảng trước khi xóa "+arrTinhThanh.toString());
 
-                        nodeRoot.child("tinhthanhs").addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                for(DataSnapshot valueXoas: dataSnapshot.getChildren()){
-                                    String valueXoa = valueXoas.getValue(String.class);
-                                    if(ten.equals(valueXoa)){
-                                        Log.d(TAG,"Đã xóa " + ten );
-                                        nodeRoot.child("tinhthanhs").child(valueXoas.getKey()).removeValue();
+                            nodeRoot.child("tinhthanhs").addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    for(DataSnapshot valueXoas: dataSnapshot.getChildren()){
+                                        String valueXoa = valueXoas.getValue(String.class);
+                                        if(ten.equals(valueXoa)){
+                                            Log.d(TAG,"Đã xóa " + ten );
+                                            nodeRoot.child("tinhthanhs").child(valueXoas.getKey()).removeValue();
+                                            Toast.makeText(ThemTinhThanh.this, "Đã xóa "+ten, Toast.LENGTH_SHORT).show();
+                                        }
+
                                     }
+                                    ten = "";
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
 
                                 }
-                                ten = "";
-                            }
+                            });
+                        }
+                    });
+                    builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-                    }
-                });
-                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-                builder.show();
+                        }
+                    });
+                    builder.show();
+                    
+                }
+                else{
+                    Toast.makeText(ThemTinhThanh.this, "Bạn không có quyền cập nhật", Toast.LENGTH_SHORT).show();
+                }
                 return false;
             }
         });

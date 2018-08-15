@@ -16,7 +16,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon_travel"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -39,7 +39,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".DanhSachDiaDiemActivity" />
-        <activity android:name=".SplashSreenActivity" />
+        <activity android:name=".SplashSreenActivity"></activity>
         <activity
             android:name=".ThemDiaDiemActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -54,7 +54,8 @@
             android:name=".TimKiemActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".MapChiTietActivity" />
-        <activity android:name=".SuaDiaDiemActivity"></activity>
+        <activity android:name=".SuaDiaDiemActivity" />
+        <activity android:name=".BinhLuanActivity"></activity>
     </application>
 
 </manifest>

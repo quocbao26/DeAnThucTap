@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="10dp"
+        android:background="@drawable/bg_tinhthanh"
         tools:context=".ThemDiaDiemActivity">
 
         <TextView
@@ -137,7 +138,7 @@
             android:weightSum="10"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <TextView
                 android:gravity="center"
@@ -147,11 +148,14 @@
                 android:layout_height="match_parent" />
 
             <EditText
+                android:textSize="14sp"
+                android:gravity="top"
                 android:id="@+id/edtGioiThieuThem"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="7"
-                android:inputType="textCapSentences" />
+                android:lines="5"
+                android:inputType="textMultiLine" />
         </LinearLayout>
         <LinearLayout
             android:weightSum="10"

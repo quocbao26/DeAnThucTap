@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_tinhthanh"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ScrollView
@@ -19,7 +20,7 @@
                 android:textColor="#001eff"
                 android:gravity="center_horizontal"
                 android:textSize="24sp"
-                android:text="Sửa"
+                android:text="@string/sua_dia_diem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <LinearLayout
@@ -31,11 +32,10 @@
             <TextView
                 android:gravity="center"
                 android:layout_weight="3"
-                android:text="Chọn tỉnh:"
+                android:text="@string/chon_tinh"
                 android:layout_width="0dp"
                 android:layout_height="match_parent" />
             <Spinner
-
                 android:layout_weight="7"
                 android:id="@+id/spTinhThanhEdit"
                 android:layout_width="0dp"
@@ -50,7 +50,7 @@
                 <TextView
                     android:gravity="center"
                     android:layout_weight="3"
-                    android:text="Tên địa điểm:"
+                    android:text="@string/ten_dia_diem"
                     android:layout_width="0dp"
                     android:layout_height="match_parent" />
 
@@ -79,7 +79,7 @@
                 <TextView
                     android:gravity="center"
                     android:layout_weight="3"
-                    android:text="Địa chỉ:"
+                    android:text="@string/dia_chi"
                     android:layout_width="0dp"
                     android:layout_height="match_parent" />
 
@@ -102,7 +102,7 @@
                 <TextView
                     android:layout_weight="2"
                     android:gravity="center"
-                    android:text="Ảnh:"
+                    android:text="@string/anh"
                     android:layout_width="0dp"
                     android:layout_height="match_parent" />
                 <ImageView
@@ -130,16 +130,19 @@
                 <TextView
                     android:gravity="center"
                     android:layout_weight="3"
-                    android:text="Giới thiệu:"
+                    android:text="@string/gioi_thieu"
                     android:layout_width="0dp"
                     android:layout_height="match_parent" />
 
                 <EditText
+                    android:textSize="14sp"
                     android:id="@+id/edtGioiThieuEdit"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="7"
-                    android:inputType="textCapSentences" />
+                    android:lines="5"
+                    android:gravity="top"
+                    android:inputType="textMultiLine" />
             </LinearLayout>
             <LinearLayout
                 android:weightSum="10"
@@ -150,7 +153,7 @@
                 <TextView
                     android:gravity="center"
                     android:layout_weight="3"
-                    android:text="Tọa độ bản đồ:"
+                    android:text="@string/toa_do_ban_do"
                     android:layout_width="0dp"
                     android:layout_height="match_parent" />
                 <EditText
@@ -184,7 +187,7 @@
             <Button
                 android:layout_gravity="right"
                 android:gravity="center"
-                android:text="Cập nhật"
+                android:text="@string/sua"
                 android:id="@+id/btnEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

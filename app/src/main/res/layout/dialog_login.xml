@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="#70f4f4"
+    android:padding="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:gravity="center"
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:textSize="28sp"
+        android:textColor="#F00"
+        android:text="Đăng nhập quản lý"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:textColor="#000"
+        android:layout_marginTop="20dp"
+        android:id="@+id/editTextUsername"
+        android:hint="Username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:textColor="#000"
+        android:inputType="textPassword"
+        android:id="@+id/editTextPassword"
+        android:hint="Password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_margin="20dp"
+        android:weightSum="10"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:background="@drawable/custom_button_press"
+            android:id="@+id/buttonDongy"
+            android:layout_weight="6"
+            android:text="Đồng ý"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:background="@drawable/custom_button_press"
+            android:id="@+id/buttonHuy"
+            android:layout_weight="4"
+            android:text="Hủy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

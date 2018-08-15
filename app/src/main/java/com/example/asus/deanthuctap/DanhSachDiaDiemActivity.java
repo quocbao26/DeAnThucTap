@@ -13,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -49,6 +51,7 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
 
     private final static String TAG = DanhSachDiaDiemActivity.class.getSimpleName();
 
+
     Spinner sptinhThanh;
     ArrayList<String> arrayTinhThanh;
     ArrayAdapter<String> adapterTinhThanh;
@@ -72,8 +75,6 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_danh_sach);
-
-
 
         nodeRoot = FirebaseDatabase.getInstance().getReference();
         Setcontrol();
@@ -139,19 +140,26 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
                 builderOption.setItems(item, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if(i == 0)
+                        if(MainActivity.user.equals("") && MainActivity.pass.equals(""))
                         {
-                            Intent intent = new Intent(DanhSachDiaDiemActivity.this,SuaDiaDiemActivity.class);
-                            intent.putExtra("object",diaDiemModel);
-                            intent.putExtra("vitriSpinner",vitri);
-                            intent.putExtra("keySpinner",keySelected);
-                            Log.e(TAG,"đã truyền vị trí: "+vitri);
-                            Log.e(TAG,"key Spinner: "+keySelected);
-                            startActivity(intent);
-                        }else
-                        if(i == 1)
+                            Toast.makeText(DanhSachDiaDiemActivity.this, "Bạn ko có quyền sửa hoặc xóa", Toast.LENGTH_SHORT).show();
+                        }
+                        else
                         {
-                           XoaDiaDiem(diaDiemModel);
+                            if(i == 0)
+                            {
+                                Intent intent = new Intent(DanhSachDiaDiemActivity.this,SuaDiaDiemActivity.class);
+                                intent.putExtra("object",diaDiemModel);
+                                intent.putExtra("vitriSpinner",vitri);
+                                intent.putExtra("keySpinner",keySelected);
+                                Log.e(TAG,"đã truyền vị trí: "+vitri);
+                                Log.e(TAG,"key Spinner: "+keySelected);
+                                startActivity(intent);
+                            }else
+                            if(i == 1)
+                            {
+                                XoaDiaDiem(diaDiemModel);
+                            }
                         }
                     }
 
@@ -301,6 +309,7 @@ public class DanhSachDiaDiemActivity extends AppCompatActivity   {
         });
 //        adapter.notifyDataSetChanged();
     }
+
 
     private void Setcontrol() {
 

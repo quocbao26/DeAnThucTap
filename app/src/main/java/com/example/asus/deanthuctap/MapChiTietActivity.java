@@ -347,11 +347,13 @@ public class MapChiTietActivity extends AppCompatActivity implements OnMapReadyC
                         if(task.isSuccessful()){
                             Log.d(TAG,"onComplete: found location");
                             currentLocation = (Location) task.getResult();
+
+                            // loi chua dong bo ngay
                             locationDevice = new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
 
                         }else{
                             Log.d(TAG,"onComplete: current location is null");
-                            Toast.makeText(MapChiTietActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MapChiTietActivity.this, "Không thể lấy địa điểm thiết bị", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -391,7 +393,7 @@ public class MapChiTietActivity extends AppCompatActivity implements OnMapReadyC
 
                         }else{
                             Log.d(TAG,"onComplete: current location is null");
-                            Toast.makeText(MapChiTietActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MapChiTietActivity.this, "Không thể lấy địa điểm thiết bị", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

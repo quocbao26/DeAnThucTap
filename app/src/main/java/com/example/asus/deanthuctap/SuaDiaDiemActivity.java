@@ -75,10 +75,10 @@ public class SuaDiaDiemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sua_dia_diem);
         Setcontrols();
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Thông báo");
-        progressDialog.setMessage("Đang xử lý...");
-        progressDialog.setCanceledOnTouchOutside(false);
+//        progressDialog = new ProgressDialog(this);
+//        progressDialog.setTitle("Thông báo");
+//        progressDialog.setMessage("Đang xử lý...");
+//        progressDialog.setCanceledOnTouchOutside(false);
 
         nodeRoot = FirebaseDatabase.getInstance().getReference();
         FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -157,7 +157,7 @@ public class SuaDiaDiemActivity extends AppCompatActivity {
             Toast.makeText(this, "Vui lòng không bỏ trống", Toast.LENGTH_SHORT).show();
         }else{
             try {
-                progressDialog.show();
+//                progressDialog.show();
 
                 FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance();
                 StorageReference photoRef = mFirebaseStorage.getReferenceFromUrl((hinhanhSua));
@@ -227,7 +227,7 @@ public class SuaDiaDiemActivity extends AppCompatActivity {
                                                 startActivity(new Intent(SuaDiaDiemActivity.this,DanhSachDiaDiemActivity.class));
                                                 finish();
                                             } else {
-                                                Toast.makeText(SuaDiaDiemActivity.this, "Lưu thất bại", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(SuaDiaDiemActivity.this, "Sửa thất bại", Toast.LENGTH_SHORT).show();
 
                                             }
                                         }
@@ -238,7 +238,7 @@ public class SuaDiaDiemActivity extends AppCompatActivity {
                         });
                     }
                 });
-                progressDialog.dismiss();
+//                progressDialog.dismiss();
             } catch (Exception ex) {
                 Log.e("LOI", ex.toString());
             }

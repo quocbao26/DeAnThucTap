@@ -286,7 +286,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
     private void getLocationPermission(){
-        Log.d(TAG,"getLocationPermission: getting location Permission");
+        Log.d(TAG,"getLocationPermission: lấy quyền địa điểm");
         String [] permissions = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
 
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
@@ -303,10 +303,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
 
-    // trả về kết quả getDeviceLocation
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Log.d(TAG,"onRequestPermissionsResult: called.");
+        Log.d(TAG,"onRequestPermissionsResult: đang gọi.");
         mLocationPermissionGranted = false;
         switch (requestCode){
             case LOCATION_PERMISSION_REQUEST_CODE:{
@@ -314,13 +314,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     for(int i = 0; i < grantResults.length; i++){
                         if (grantResults[i] != PackageManager.PERMISSION_GRANTED){
                             mLocationPermissionGranted = false;
-                            Log.d(TAG,"onRequestPermissionsResult: failed.");
+                            Log.d(TAG,"onRequestPermissionsResult: bị lỗi.");
                             return;
                         }
                     }
-                    Log.d(TAG,"onRequestPermissionsResult: permission granted.");
+                    Log.d(TAG,"onRequestPermissionsResult: được cấp quyền.");
                     mLocationPermissionGranted = true;
-                    //initialize our map
+
                     initMap();
                 }
             }
@@ -340,6 +340,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     /*
         ---------------- google places API autocomplete suggestions ---------------------
+        ----------------
     */
 
     private AdapterView.OnItemClickListener mAutoCompleteClickListener = new AdapterView.OnItemClickListener() {
@@ -350,8 +351,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             AutocompletePrediction item = mPlaceAutocompleteAdapter.getItem(i);
             String placeID = item.getPlaceId();
 
-            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
-                    .getPlaceById(mGoogleApiClient, placeID);
+            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi.getPlaceById(mGoogleApiClient, placeID);
             placeResult.setResultCallback(mUpdatePlaceDetailCallback);
         }
     };

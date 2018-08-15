@@ -108,8 +108,10 @@ public class ThemDiaDiemActivity extends AppCompatActivity {
         edtDiaChiThem.setText(intent.getStringExtra("diachi"));
         edtTenDiaDiemThem.setText(intent.getStringExtra("ten"));
         edtGioiThieuThem.setText(intent.getStringExtra("gioithieu"));
-        vitriVe = intent.getIntExtra("vitriSpinner",0);
-        Log.e(TAG,"nhận lại vị trí về : "+vitriVe+"");
+        vitriVe = intent.getIntExtra("vitriSpinner", 0);
+        Log.e(TAG, "nhận lại vị trí về : " + vitriVe + "");
+
+
     }
 
     private void addEvents() {

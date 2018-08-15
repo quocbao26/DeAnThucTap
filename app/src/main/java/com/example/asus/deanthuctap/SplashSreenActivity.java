@@ -26,7 +26,7 @@ public class SplashSreenActivity extends AppCompatActivity {
                 .setReleasing(0.2)
                 .setParticleRadius(3)
                 .setMiniDistance(0.1)
-                .setTextSize(110)
+                .setTextSize(130)
                 .setDelay((long) 2000)
                 .setMovingStrategy(new RandomMovingStrategy())
                 .instance();

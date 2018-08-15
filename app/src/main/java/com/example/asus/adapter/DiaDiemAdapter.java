@@ -101,7 +101,7 @@ public class DiaDiemAdapter extends BaseAdapter implements Filterable {
             if(constraint != null && constraint.length() > 0)
             {
                 constraint = constraint.toString().toUpperCase();
-
+                Log.e("DiaDiemAdapter", "constraint:" + constraint);
 
             ArrayList<DiaDiemModel>  filters = new ArrayList<>();
 
@@ -119,14 +119,17 @@ public class DiaDiemAdapter extends BaseAdapter implements Filterable {
             }
             // trả về số lượng địa điểm
                 results.count = filters.size();
+                Log.e("DiaDiemAdapter", "results.count:" + results.count);
             // trả về giá trị địa điểm
                 results.values = filters;
+                Log.e("DiaDiemAdapter", "results.values:" + results.values);
 
             }
             else{
                 results.count = filterList.size();
+                Log.e("DiaDiemAdapter", "results.count1:" + results.count);
                 results.values = filterList;
-
+                Log.e("DiaDiemAdapter", "results.values1:" + results.values);
             }
 
 
@@ -137,6 +140,7 @@ public class DiaDiemAdapter extends BaseAdapter implements Filterable {
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             diaDiemModelList  = (ArrayList<DiaDiemModel>) results.values;
+            Log.e("DiaDiemAdapter", "diaDiemModelList:" + diaDiemModelList.toString());
             notifyDataSetChanged();
         }
     }

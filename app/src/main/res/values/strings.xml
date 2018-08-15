@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DeAnThucTap</string>
+    <string name="app_name">Travel</string>
 
     <!--Màn hình chính-->
     <string name="danh_sach_dia_diem">Danh sách địa điểm</string>
@@ -27,6 +27,7 @@
     <!--Sửa địa điểm-->
     <string name="sua_dia_diem">Sửa địa điểm</string>
     <string name="luu_y_sua">(Chỉ được sửa tên, giới thiệu, hình)</string>
+    <string name="sua">Sửa</string>
 
     <string-array name="arrayTinhThanh">
         <item>An Giang</item>

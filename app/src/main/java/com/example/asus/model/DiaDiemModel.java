@@ -14,11 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DiaDiemModel implements Serializable {
-    private String madiadiem,tendiadiem,diachi,gioithieu,latitude,longitude;
-
-    private String hinhanhdiadiem;
-
-    DatabaseReference nodeRoot;
+    private String madiadiem,tendiadiem,diachi,gioithieu,latitude,longitude,hinhanhdiadiem;
 
 
     public DiaDiemModel() {
